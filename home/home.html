@@ -8,17 +8,21 @@
     rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
     crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     
-   <div class="navbar">
+    <div class="navbar">
         <div class="d-flex justify-content-center align-items-center">
-            <img class="me-1" id="userPic" src="./images/userpic.png" alt="">
+            <img 
+            id="userPic"
+            class="me-2" id="userPic" 
+            src="./images/userpic.png" alt="">
         <h3 id="userName"></h3>
         </div>
 
         <div>
-            <a  class="me-2 button" href="./sign up/signup.html" style="--color:#1e9bff;">
+            <a  class="me-2 button" id="editBtn" style="--color:#1e9bff;">
               <span></span>
               <span></span>
               <span></span>
@@ -35,11 +39,51 @@
             
           </div>
 
-    </div>
+    </div>  
 
 
 
     <div style="display: none;" class="loader"></div>
+
+
+
+
+
+<!-- edit profile  -->
+
+<div class="signUp-box editProfile" style="display: none;">
+  <img src="./images/userpic.png" style="margin:auto; width: 100px; border-radius: 50%;">
+  <h2>EDIT PROFILE</h2>
+  <form>
+    <div class="user-box">
+      <input type="text" id="name" name="" required="">
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="email" name="" required="">
+      <label>Email</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="number" name="" required="">
+      <label>Number</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="nationality" name="" required="">
+      <label>Nationality</label>
+    </div>
+    
+    <a id="submit" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Submit
+    </a>
+  </form>
+</div> 
+
+
+
 
     
 
