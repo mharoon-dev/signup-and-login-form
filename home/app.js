@@ -6,8 +6,6 @@ let userNameForBrowser = document.querySelector('#userNameForBrowser')
 
 // name of the user on the browser
 userName.innerHTML = JSON.parse(localStorage.getItem('loggedinUser')).name
-userNameForBrowser.innerHTML = JSON.parse(localStorage.getItem('loggedinUser')).name
-
 
 // geting data from localStorage
 let getLoggedInUser = JSON.parse(localStorage.getItem('loggedinUser'))
