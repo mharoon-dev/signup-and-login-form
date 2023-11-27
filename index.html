@@ -171,5 +171,13 @@
       </div>
 
 
+      <script>
+        let loggedInUser = JSON.parse(localStorage.getItem("loggedinUser"))
+        if (loggedInUser) {
+          window.location.href = "./home/home.html"
+        } else {
+          window.location.href = "#"
+        }
+      </script>
 </body>
 </html>

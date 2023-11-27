@@ -7,7 +7,6 @@ let loader = document.querySelector('.loader')
 
 console.log(getingDataFromLocalStorage);
 
-let loggedinUser = [];
 
 login.addEventListener("click", () => {
 
@@ -20,11 +19,8 @@ let userFound = getingDataFromLocalStorage.find( (user) => {
         if (password.value == userFound.password) {
             // console.log("password match kar gaya hai")
 
-            loggedinUser.push(userFound)
-            // console.log(loggedinUser);
-
             // giving data to localStorage
-            localStorage.setItem("loggedinUser" , JSON.stringify(loggedinUser))
+            localStorage.setItem("loggedinUser" , JSON.stringify(userFound))
 
             loginBox.style.display = "none"
             loader.style.display = "block"
