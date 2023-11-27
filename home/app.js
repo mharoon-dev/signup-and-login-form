@@ -31,63 +31,67 @@ logoutBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-
 // edit profile
-
-let editProfile = document.querySelector('.editProfile')
-let editBtn = document.querySelector('#editBtn')
+let editProfile = document.querySelector('.editProfile');
+let editBtn = document.querySelector('#editBtn');
 
 editBtn.addEventListener('click', () => {
     editProfile.style.display = "block";
-    
-    
+
     // Set the input values based on the stored user information
     let nameInput = document.querySelector('#name');
-    nameInput.value = getLoggedInUser.name;
-
     let emailInput = document.querySelector('#email');
-    emailInput.value = getLoggedInUser.email;
-    
     let numberInput = document.querySelector('#number');
-    numberInput.value = getLoggedInUser.number ? getLoggedInUser.number : '';
-    
     let nationalityInput = document.querySelector('#nationality');
-    nationalityInput.value = getLoggedInUser.nationality ? getLoggedInUser.nationality : '';
-});
 
-
-// submit button
-let submit = document.querySelector('#submit')
-submit.addEventListener('click', () => {
-    
-let name = document.querySelector('#name')
-let email = document.querySelector('#email')
-let number = document.querySelector('#number')
-let nationality = document.querySelector('#nationality')
-
-editProfile.style.display = "none";
-
-let getLoggerAgain = JSON.parse(localStorage.getItem("loggedinUser"));
-let getUsersAgain = JSON.parse(localStorage.getItem("userInfo"));
-    
-let userFoundAgain = getUsersAgain.find((user) => {
-    if (user.name == userName.textContent) {
-        console.log(user);
-        return true;
+    if (nameInput && emailInput && numberInput && nationalityInput) {
+        let getLoggedInUser = JSON.parse(localStorage.getItem('loggedinUser'))
+        nameInput.value = getLoggedInUser.name;
+        emailInput.value = getLoggedInUser.email;
+        numberInput.value = getLoggedInUser.number
+        nationalityInput.value = getLoggedInUser.nationality
+    } else {
+        console.error("Some input elements are missing or have incorrect IDs.");
     }
 });
 
-    getLoggerAgain.number = number.value;
-    userFoundAgain.number = number.value;
+// submit button
+let submit = document.querySelector('#submit');
+submit.addEventListener('click', () => {
+    let nameInput = document.querySelector('#name');
+    let emailInput = document.querySelector('#email');
+    let numberInput = document.querySelector('#number');
+    let nationalityInput = document.querySelector('#nationality');
 
-    getLoggerAgain.nationality = nationality.value;
-    userFoundAgain.nationality = nationality.value;
+    editProfile.style.display = "none";
 
-        // Update the user information in the "userInfo" array
+    let getLoggerAgain = JSON.parse(localStorage.getItem("loggedinUser"));
+    let getUsersAgain = JSON.parse(localStorage.getItem("userInfo"));
+
+    let userFoundAgain = getUsersAgain.find((user) => {
+        if (user.name == userName.textContent) {
+            console.log(user);
+            return true;
+        }
+    });
+
+    getLoggerAgain.number = numberInput.value;
+    userFoundAgain.number = numberInput.value;
+
+    getLoggerAgain.nationality = nationalityInput.value;
+    userFoundAgain.nationality = nationalityInput.value;
+
+    // Update the user information in the "userInfo" array
     const userIndex = getUsersAgain.findIndex((user) => user.name === userName.textContent);
     if (userIndex !== -1) {
         getUsersAgain[userIndex] = userFoundAgain;
         localStorage.setItem("userInfo", JSON.stringify(getUsersAgain));
         localStorage.setItem("loggedinUser", JSON.stringify(getLoggerAgain));
     }
-})
+
+    // Set the input values in the editProfile form with the updated values
+    nameInput.value = getLoggerAgain.name;
+    emailInput.value = getLoggerAgain.email;
+    numberInput.value = getLoggerAgain.number;
+    nationalityInput.value = getLoggerAgain.nationality;
+});
