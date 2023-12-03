@@ -41,15 +41,15 @@ editBtn.addEventListener('click', () => {
     // Set the input values based on the stored user information
     let nameInput = document.querySelector('#name');
     let emailInput = document.querySelector('#email');
-    let numberInput = document.querySelector('#number');
-    let nationalityInput = document.querySelector('#nationality');
+    let numberInput = document.querySelector('#number') 
+    let nationalityInput = document.querySelector('#nationality') 
 
     if (nameInput && emailInput && numberInput && nationalityInput) {
         let getLoggedInUser = JSON.parse(localStorage.getItem('loggedinUser'))
         nameInput.value = getLoggedInUser.name;
         emailInput.value = getLoggedInUser.email;
-        numberInput.value = getLoggedInUser.number
-        nationalityInput.value = getLoggedInUser.nationality
+        numberInput.value = getLoggedInUser.number ?? 'number'
+        nationalityInput.value = getLoggedInUser.nationality ?? 'nationality'
     } else {
         console.error("Some input elements are missing or have incorrect IDs.");
     }
