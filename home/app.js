@@ -96,22 +96,17 @@
 //     nationalityInput.value = getLoggerAgain.nationality;
 // });
 
-import {app ,auth , onAuthStateChanged  } from "../utilities/fireBaseConfigs.js"
+import {app ,auth , onAuthStateChanged, signOut  } from "../utilities/fireBaseConfigs.js"
 
 let logout = document.querySelector('#logoutBtn')
 let logoutHandler = () => {
 
     // fire base functionality
-    onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
+    signOut(auth).then(() => {
+      // Sign-out successful.
       window.location = "../login/login.html"
-      // ...
-    } else {
-      // ...
-    }
-});
+    }).catch((error) => {
+      // An error happened.
+    });
 }
 logout.addEventListener('click' , logoutHandler )  
