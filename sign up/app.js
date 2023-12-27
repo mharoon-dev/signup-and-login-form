@@ -57,7 +57,15 @@
 
 // sign up with fire base
 // Importing necessary values from "../config.js"
-import { app, auth, createUserWithEmailAndPassword } from "../config.js";
+import { app, auth, createUserWithEmailAndPassword } from "../utilities/fireBaseConfigs.js";
+
+window.loginHandler = () => {
+  let email = document.querySelector('#email') 
+  let password = document.querySelector('#password')
+
+  console.log(email.value);
+  console.log(password.value);
+}
 
 // Sign up handler function
 window.signUpHandler = () => {
