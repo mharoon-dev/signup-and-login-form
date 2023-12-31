@@ -96,7 +96,33 @@
 //     nationalityInput.value = getLoggerAgain.nationality;
 // });
 
-import {app ,auth , onAuthStateChanged, signOut  } from "../utilities/fireBaseConfigs.js"
+import {app ,auth , deleteUser, doc, onAuthStateChanged, signOut  } from "../utilities/fireBaseConfigs.js"
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    if (window.location.pathname !== "/home/home.html") {
+    window.location = "../home/home.html"
+  }
+  } else {
+    console.log("not login");
+      window.location = "../login/login.html"
+  } 
+});
+let deleteAccountHandler = () => {
+  const user = auth.currentUser;
+  
+  deleteUser(user).then(() => {
+  alert("your account is deleted!");
+  window.location = "../sign up/signup.html"
+}).catch((error) => {
+  // An error ocurred
+  // ...
+});
+}
+let deleteAccount = document.querySelector("#deleteAccount")
+deleteAccount.addEventListener('click' , deleteAccountHandler)
 
 let logout = document.querySelector('#logoutBtn')
 let logoutHandler = () => {
@@ -109,4 +135,4 @@ let logoutHandler = () => {
       // An error happened.
     });
 }
-logout.addEventListener('click' , logoutHandler )  
+logout.addEventListener('click' , logoutHandler)  

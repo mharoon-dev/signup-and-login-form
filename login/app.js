@@ -43,19 +43,38 @@
 
 // sign in with fire base
 
-import { app , auth , onAuthStateChanged, signInWithEmailAndPassword} from "../utilities/fireBaseConfigs.js"
+import { app , auth , onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword} from "../utilities/fireBaseConfigs.js"
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
-      window.location = "../home/home.html"
-      
+
+    const uid = user.uid;
+
+
+  window.location = "../home/home.html"
+
     } else {
-      // ...
-    }
+      console.log("not login");
+      if (window.location.pathname !== "/login/login.html") {
+        window.location = "../login/login.html"
+      }
+    } 
   });
+
+function forgetPasswordHandler() {
+  // console.log("forget password is working!");
+  sendPasswordResetEmail(auth, email.value)
+  .then(() => {
+    alert("check the email or reset password!")
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+}
+
+let forgetPassword = document.querySelector('#forgetPassword')
+forgetPassword.addEventListener('click' , forgetPasswordHandler)
 
 let loginHandler = () => {
     let email = document.querySelector('#email') 
@@ -69,7 +88,11 @@ let loginHandler = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        alert('user loged in sucsessfully!')
+        alert('user logged in sucsessfully!')
+
+        sendEmailVerification(auth.currentUser)
+        .then(() => {
+        })
         window.location = "../home/home.html"
       })
       .catch((error) => {

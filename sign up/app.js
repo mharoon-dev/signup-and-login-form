@@ -1,10 +1,10 @@
-// let signUpBox = document.querySelector('.signUp-box');
-// let name = document.querySelector('#name');
-// let email = document.querySelector('#email');
-// let password = document.querySelector('#password');
-// let conformPassword = document.querySelector('#conformPassword');
+let signUpBox = document.querySelector('.signUp-box');
+let name = document.querySelector('#name');
+let email = document.querySelector('#email');
+let password = document.querySelector('#password');
+let conformPassword = document.querySelector('#conformPassword');
 // let submit = document.querySelector('#submit');
-// let loader = document.querySelector('.loader');
+let loader = document.querySelector('.loader');
 
 // let getingDataFromLocalStorage = JSON.parse(localStorage.getItem('userInfo')) || [];
 // let userInfo = getingDataFromLocalStorage;
@@ -57,31 +57,37 @@
 
 // sign up with fire base
 // Importing necessary values from "../config.js"
-import { app, auth, createUserWithEmailAndPassword } from "../utilities/fireBaseConfigs.js";
-
-window.loginHandler = () => {
-  let email = document.querySelector('#email') 
-  let password = document.querySelector('#password')
-
-  console.log(email.value);
-  console.log(password.value);
-}
+import { addDoc, app, auth, collection, createUserWithEmailAndPassword, db, doc, setDoc } from "../utilities/fireBaseConfigs.js";
 
 // Sign up handler function
 window.signUpHandler = () => {
   const email = document.querySelector('#email');
   const password = document.querySelector('#password');
   
-  console.log(email.value);
-  console.log(password.value);
+  // console.log(email.value);
+  // console.log(password.value);
 
   // Firebase functionality
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
+    .then(async(userCredential) => {
       // Signed up 
       const user = userCredential.user;
-      alert("Sign up successfully!");
       window.location = "../login/login.html";
+
+      // saving my data in database
+      // try {
+      //   await setDoc(doc(db, "users", user.uid), {
+      //     name: name.value,
+      //     email: email.value,
+      //     id: user.uid,
+      //   });
+      //   console.log("Document written with ID: ", docRef.id);
+      //   alert("Sign up successfully!");
+
+      // } catch (e) {
+      //   console.error("Error adding document: ", e);
+      // }
+      
     })
     .catch((error) => {
       const errorCode = error.code;
